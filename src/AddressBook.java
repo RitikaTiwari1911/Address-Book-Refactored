@@ -50,6 +50,7 @@ class ContactCategories {
         String emailIdInput = input.next();
         return emailIdInput;
     }
+
     public int zip_Code() {
         System.out.print("Enter the zip code: ");
         int zipInput = input.nextInt();
@@ -79,10 +80,10 @@ class ContactCategories {
     //Ability to edit the details of the contact
     public void editDetails() {
         System.out.println("Enter the name of the contact you want to edit");
-        String editName= input.next();
-        int firstNameIndex=firstName.indexOf(editName);
-        int pos=firstNameIndex;
-        if(firstName.contains(editName)) {
+        String editName = input.next();
+        int firstNameIndex = firstName.indexOf(editName);
+        int pos = firstNameIndex;
+        if (firstName.contains(editName)) {
 
             firstName.set(pos, first_Name());
             lastName.set(pos, last_Name());
@@ -94,10 +95,7 @@ class ContactCategories {
             phoneNumber.set(pos, phone_Number());
 
             System.out.println("Contact added successfully");
-        }
-
-        else
-        {
+        } else {
             System.out.println("The name does not exist !!");
         }
     }
@@ -114,44 +112,61 @@ class ContactCategories {
             address.remove(pos);
             city.remove(pos);
             state.remove(pos);
-            ;
             emailId.remove(pos);
             zipCode.remove(pos);
             phoneNumber.remove(pos);
 
             System.out.println("Contact detail has been successfully deleted !!");
+        } else {
+            System.out.println("The name does not exist!!");
         }
     }
 
     // Ability to display the contact details
     public void displayDetails() {
-    System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
+        System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
     }
 
     // Ability to provide user with various options
-    public void options(){
-        System.out.println("Do you want to edit any contact detail? Type Y or N");
-        String editInput=input.next();
-        if(editInput.equalsIgnoreCase("y")){
-            editDetails();
+    public void options() {
+        while (true) {
+            System.out.println("========================================\n Enter 1 to add new contact \n Enter 2 to add edit contact \n Enter 3 to delete a contact \n Enter 4 to exit the address book \n=======================================");
+            int chooseOption = input.nextInt();
+            switch (chooseOption) {
+                case 1:
+                    //Ability to add new contact
+                    addPersonContactDetail();
+                    break;
+
+                case 2:
+                    editDetails();
+                    break;
+
+                case 3:
+                    deleteDetails();
+                    break;
+
+                case 4:
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Enter the correct option!!");
+                    break;
+            }
+            displayDetails();
         }
-        System.out.println("Do you want to delete any contact? Type Y or N ");
-        String deleteContact = input.next();
-        if(deleteContact.equalsIgnoreCase("y")){
-           deleteDetails();
-        }
-           displayDetails();
     }
 }
 
-public class AddressBook {
-    public static void main(String args[]) {
-        System.out.println("Welcome to the Address Book !!");
-        ContactCategories contactCategories = new ContactCategories();
-        contactCategories.addPersonContactDetail();
-        contactCategories.options();
-
-
+    //main method
+    public class AddressBook {
+        public static void main(String args[]) {
+            System.out.println("Welcome to the Address Book !!");
+            ContactCategories contactCategories = new ContactCategories();
+            contactCategories.addPersonContactDetail();
+            contactCategories.options();
+        }
     }
 
-}
+
