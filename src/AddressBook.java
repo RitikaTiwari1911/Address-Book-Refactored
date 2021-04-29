@@ -102,9 +102,45 @@ class ContactCategories {
         }
     }
 
+    //Ability to delete a contact detail
+    public void deleteDetails() {
+        System.out.println("Enter the name of the contact you want to delete: ");
+        String deleteName = input.next();
+        int firstNameIndex = firstName.indexOf(deleteName);
+        int pos = firstNameIndex;
+        if (firstName.contains(deleteName)) {
+            firstName.remove(pos);
+            lastName.remove(pos);
+            address.remove(pos);
+            city.remove(pos);
+            state.remove(pos);
+            ;
+            emailId.remove(pos);
+            zipCode.remove(pos);
+            phoneNumber.remove(pos);
 
+            System.out.println("Contact detail has been successfully deleted !!");
+        }
+    }
+
+    // Ability to display the contact details
     public void displayDetails() {
-        System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
+    System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
+    }
+
+    // Ability to provide user with various options
+    public void options(){
+        System.out.println("Do you want to edit any contact detail? Type Y or N");
+        String editInput=input.next();
+        if(editInput.equalsIgnoreCase("y")){
+            editDetails();
+        }
+        System.out.println("Do you want to delete any contact? Type Y or N ");
+        String deleteContact = input.next();
+        if(deleteContact.equalsIgnoreCase("y")){
+           deleteDetails();
+        }
+           displayDetails();
     }
 }
 
@@ -113,13 +149,8 @@ public class AddressBook {
         System.out.println("Welcome to the Address Book !!");
         ContactCategories contactCategories = new ContactCategories();
         contactCategories.addPersonContactDetail();
-        System.out.println("Do you want to edit any contact detail? Type Y or N");
-        Scanner input2= new Scanner(System.in);
-        String editInput=input2.next();
-        if(editInput.equalsIgnoreCase("y")){
-            contactCategories.editDetails();
-        }
-        contactCategories.displayDetails();
+        contactCategories.options();
+
 
     }
 
