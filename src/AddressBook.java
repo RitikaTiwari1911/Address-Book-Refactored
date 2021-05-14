@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +19,9 @@ class ContactCategories {
     public String first_Name() {
         System.out.print("Enter the first name: ");
         String firstNameInput = input.next();
+        boolean duplicateNameCheck=checkDuplicate(firstNameInput);
+        if(duplicateNameCheck == true)
+            System.out.println("The name already exists!");
         return firstNameInput;
     }
 
@@ -156,6 +160,14 @@ class ContactCategories {
             }
             displayDetails();
         }
+    }
+
+    //method to prevent any duplicate name
+    public boolean checkDuplicate(String name){
+        if(firstName.contains(name))
+            return true;
+        else
+            return false;
     }
 }
 
