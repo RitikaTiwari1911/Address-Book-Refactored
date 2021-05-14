@@ -19,8 +19,8 @@ class ContactCategories {
     public String first_Name() {
         System.out.print("Enter the first name: ");
         String firstNameInput = input.next();
-        boolean duplicateNameCheck=checkDuplicate(firstNameInput);
-        if(duplicateNameCheck == true)
+        boolean duplicateNameCheck = checkDuplicate(firstNameInput);
+        if (duplicateNameCheck == true)
             System.out.println("The name already exists!");
         return firstNameInput;
     }
@@ -128,13 +128,50 @@ class ContactCategories {
 
     // Ability to display the contact details
     public void displayDetails() {
-        System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
+        System.out.println("First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " State: " + city + " City: "
+                            + state + " Zip Code: " + zipCode + " Phone Number: " + phoneNumber + " Email Id:  " + emailId);
+    }
+
+    //method to prevent any duplicate name
+    public boolean checkDuplicate(String name) {
+        if (firstName.contains(name))
+            return true;
+        else
+            return false;
+    }
+
+    //method to search names by city
+    public void searchByCity() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Enter city name :");
+        String cityName = userInput.nextLine();
+
+        for (String city : city) {
+            if (city.contains(cityName)) {
+                System.out.println(firstName);
+            }
+        }
+    }
+
+    //method to search names by state
+    public void searchByState() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Enter State name :");
+        String stateName = userInput.nextLine();
+
+        for (String state : state) {
+            if (city.contains(stateName)) {
+                System.out.println(firstName);
+            }
+        }
     }
 
     // Ability to provide user with various options
     public void options() {
         while (true) {
-            System.out.println("========================================\n Enter 1 to add new contact \n Enter 2 to add edit contact \n Enter 3 to delete a contact \n Enter 4 to exit the address book \n=======================================");
+            System.out.println("========================================\n Enter 1 to add new contact \n Enter 2 to add edit contact \n " +
+                                "Enter 3 to delete a contact \n  \n Enter 4 to search person by city \n Enter 5 to search person by state \n "
+                                + "Enter 6 to exit the address book \n=======================================");
             int chooseOption = input.nextInt();
             switch (chooseOption) {
                 case 1:
@@ -151,6 +188,13 @@ class ContactCategories {
                     break;
 
                 case 4:
+                    searchByCity();
+                    break;
+
+                case 5:
+                    searchByState();
+                    break;
+                case 6:
                     System.exit(0);
                     break;
 
@@ -161,24 +205,15 @@ class ContactCategories {
             displayDetails();
         }
     }
-
-    //method to prevent any duplicate name
-    public boolean checkDuplicate(String name){
-        if(firstName.contains(name))
-            return true;
-        else
-            return false;
-    }
 }
 
-    //main method
-    public class AddressBook {
-        public static void main(String args[]) {
-            System.out.println("Welcome to the Address Book !!");
-            ContactCategories contactCategories = new ContactCategories();
-            contactCategories.addPersonContactDetail();
-            contactCategories.options();
-        }
+//main method
+public class AddressBook {
+    public static void main(String args[]) {
+        System.out.println("Welcome to the Address Book !!");
+        ContactCategories contactCategories = new ContactCategories();
+        contactCategories.addPersonContactDetail();
+        contactCategories.options();
     }
-
+}
 
